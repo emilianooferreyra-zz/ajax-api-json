@@ -1,42 +1,31 @@
-const friend1 = {
-  "name": {
-    "first": "Laurence",
-    "last": "Sweden"
-  },
-  "age": 20,
-  "location": {
-    "city": "Toronto",
-    "country": "Canada"
-  }
-};
-
-const friend2 = {
-  "name": {
-    "first": "Lisa",
-    "last": "Svejis"
-  },
-  "age": 40,
-  "location": {
-    "city": "New York",
-    "country": "USA"
-  }
-};
-
-const friend3 = {
-  "name": {
-    "first": "John",
-    "last": "Doe"
-  },
-  "age": 30,
-  "location": {
-    "city": "California",
-    "country": "USA"
-  }
-};
-const friends = [friend1, friend2, friend3];
 const output = document.querySelector('.output');
-console.log(friends);
-const sFriends = JSON.stringify(friends);
-console.log(sFriends);
-const oFriends = JSON.parse(sFriends);
-console.log(oFriends);
+// const url = 'https://api.myjson.com/bins/1bqkpq';
+// fetch(url)
+//   .then((response) => {
+//     return response.json();
+//   })
+//   .then((data) => {
+//     console.log(data);
+//     data.array.forEach(friend => {
+//       console.log(friend.name.first);
+//       output.innerHTML += `
+//         ${friend.name.first} ${friend.name.last}
+//         ${friend.age}
+//       `;
+//     });
+//   })
+
+const url = 'https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc';
+fetch(url)
+  .then((response) => {
+    return response.json()
+  })
+  .then(data => {
+    console.log(data.items);
+    data.items.forEach(item => {
+      console.log(item.id);
+      output.innerHTML += `
+        ${item.description} 
+        <br>`;
+    })
+  });
