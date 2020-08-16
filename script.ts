@@ -60,15 +60,30 @@ const output = document.querySelector('.output');
 //   console.log(err);
 // })
 
-const url = 'https://api.chucknorris.io/jokes/search?query=big';
+// const url = 'https://api.chucknorris.io/jokes/search?query=big';
+// fetch(url, {
+//   "method": "GET"
+// }).then(res => {
+//   return res.json()
+// }).then(data => {
+//   console.log(data.result);
+//   data.result.forEach(joke => {
+//     console.log(joke.value);
+//   })
+// }).catch(err => {
+//   console.log(err);
+// })
+
+const url = 'https://reqres.in/api/users';
 fetch(url, {
   "method": "GET"
 }).then(res => {
   return res.json()
 }).then(data => {
-  console.log(data.result);
-  data.result.forEach(joke => {
-    console.log(joke.value);
+  console.log(data);
+  data.data.forEach(person => {
+    console.log(person);
+    output.innerHTML = `<img src="${person.avatar}">`;
   })
 }).catch(err => {
   console.log(err);
