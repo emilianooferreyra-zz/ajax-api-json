@@ -74,17 +74,65 @@ const output = document.querySelector('.output');
 //   console.log(err);
 // })
 
-const url = 'https://reqres.in/api/users';
-fetch(url, {
-  "method": "GET"
-}).then(res => {
-  return res.json()
-}).then(data => {
-  console.log(data);
-  data.data.forEach(person => {
-    console.log(person);
-    output.innerHTML = `<img src="${person.avatar}">`;
+// const url = 'https://reqres.in/api/users';
+// fetch(url, {
+//   "method": "GET"
+// }).then(res => {
+//   return res.json()
+// }).then(data => {
+//   console.log(data);
+//   data.data.forEach(person => {
+//     console.log(person);
+//     output.innerHTML = `<img src="${person.avatar}">`;
+//   })
+// }).catch(err => {
+//   console.log(err);
+// })
+
+// fetch('https://jsonplaceholder.typicode.com/posts', {
+//   method: 'POST',
+//   body: JSON.stringify({
+//     title: 'foo',
+//     body: 'bar',
+//     userId: 1
+//   }),
+//   headers: {
+//     "Content-type": "application/json; charset=UTF-8"
+//   }
+// })
+//   .then(response => response.json())
+//   .then(json => console.log(json))
+
+
+// https://postwoman.io/
+// https://jsonplaceholder.typicode.com/guide.html
+
+
+const url = 'https://script.google.com/macros/s/AKfycbwIrTmXmMCtgC-1VVitPdm9cnqj7tLZV8m4BvR2wKDrm9cvxBw/exec';
+let page = 0;
+loadPage(page);
+function loadPage(pg) {
+  console.log(pg);
+  let tempURL = url + '?pg=' + pg;
+  fetch(tempURL, {
+    "method": "GET"
+  }).then(response => {
+    return response.json()
+  }).then(data => {
+    console.log(data);
+    loadPageData(data.data);
+
+    if (data.pgs.next) {
+      console.log('page', page)
+      page = data.pgs.next;
+      loadPage(page);
+    }
   })
-}).catch(err => {
-  console.log(err);
-})
+}
+
+function loadPageData(data) {
+  console.log(data);
+  data.forEach(value => {
+    output.innerHTML += `${value[0]} ${value[1]}<br>`;
+  });
+}
